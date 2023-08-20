@@ -6,6 +6,7 @@
         </form>
         <p>Already have an account? <router-link to="/login">Login</router-link></p>
         <p>  <router-link to="/register">Register</router-link></p>
+        <p>  <router-link to="/doctors">Book appointment</router-link></p>
     </div>
 </template>
 
