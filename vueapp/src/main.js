@@ -3,17 +3,17 @@
 import { createApp } from 'vue';
 import App from './App.vue';
 import { createRouter, createWebHistory } from 'vue-router';
-import AppointmentForm from './components/AppointmentForm.vue';
+import HomePage from './components/HomePage.vue';
 import Login from './components/Login.vue';
 import Register from './components/Register.vue';
-import DoctorsList from '@/components/DoctorsList.vue';
+import Doctors from '@/components/Doctors.vue';
 import Appointment from '@/components/Appointment.vue';
 
 const routes = [
-    { path: '/', component: AppointmentForm },
+    { path: '/', component: HomePage },
     { path: '/login', component: Login },
     { path: '/register', component: Register },
-    { path: '/doctors', component: DoctorsList },
+    { path: '/doctors', component: Doctors },
     { path: '/appointment/:doctorId', component: Appointment, props: true }
 ];
 

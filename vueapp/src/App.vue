@@ -1,3 +1,4 @@
+
 <template>
     <div id="app">
         <router-view />
@@ -6,12 +7,12 @@
 
 
 <script>
-    import AppointmentForm from './components/AppointmentForm.vue';
+    import HomePage from './components/HomePage.vue';
 
     export default {
         name: 'App',
         components: {
-            AppointmentForm
+            HomePage
         }
     };
 </script>
