@@ -8,6 +8,10 @@ import Login from './components/Login.vue';
 import Register from './components/Register.vue';
 import Doctors from '@/components/Doctors.vue';
 import Appointment from '@/components/Appointment.vue';
+import axios from 'axios';
+
+axios.defaults.baseURL = 'https://localhost:7053';
+
 
 const routes = [
     { path: '/', component: HomePage },
