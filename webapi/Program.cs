@@ -11,22 +11,20 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-
-
 // Add CORS services
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("VueCorsPolicy", builder =>
     {
         builder
-            .WithOrigins("https://localhost:5173/") // replace with your Vue.js application address
+            .WithOrigins("https://localhost:5173") // Adjusted this line to remove trailing slash
             .AllowAnyMethod()
             .AllowAnyHeader()
             .AllowCredentials();
     });
 });
 
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+// Swagger configuration
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

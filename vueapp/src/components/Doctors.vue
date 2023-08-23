@@ -2,7 +2,7 @@
     <div>
         <!-- Listing Doctors -->
         <div v-for="doctor in doctors" :key="doctor.id">
-            <h3>{{ doctor.Name }} - {{ doctor.Speciality }}</h3>
+            <h3>{{ doctor.name }} - {{ doctor.speciality }}</h3>
             <button @click="editDoctor(doctor)">Edit</button>
             <button @click="deleteDoctor(doctor.id)">Delete</button>
         </div>

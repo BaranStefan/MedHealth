@@ -11,8 +11,8 @@ using YourProjectName.Data;
 namespace webapi.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230823150736_DoctorsMigration")]
-    partial class DoctorsMigration
+    [Migration("20230823175147_DocM")]
+    partial class DocM
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -61,7 +61,7 @@ namespace webapi.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Specialty")
+                    b.Property<string>("Speciality")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
