@@ -37,10 +37,15 @@
             },
             goToAddDoctor() {
                 this.$router.push('/add-doctor');
+            },
+            editDoctor(doctor) {
+                // Navigate to EditDoctor with doctor's id as a route parameter
+                this.$router.push(`/edit-doctor/${doctor.id}`);
             }
         }
     };
 </script>
+
 
 <style scoped>
     .container {
