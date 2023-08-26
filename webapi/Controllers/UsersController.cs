@@ -10,12 +10,10 @@ using YourProjectName.Data;
 public class AccountController : ControllerBase
 {
     private readonly AppDbContext _context;
-    private readonly IPasswordHasher<User> _passwordHasher;  // Built-in service for hashing passwords
 
-    public AccountController(AppDbContext context, IPasswordHasher<User> passwordHasher)
+    public AccountController(AppDbContext context)
     {
         _context = context;
-        _passwordHasher = passwordHasher;
     }
 
     [HttpPost("register")]
@@ -32,7 +30,7 @@ public class AccountController : ControllerBase
         {
             Username = dto.Username,
             Email = dto.Email,
-            PasswordHash = _passwordHasher.HashPassword(null, dto.Password)  // Hash the password before storing
+            PasswordHash = dto.Password  // Store the password as plain text (HIGHLY INSECURE!)
         };
 
         _context.Users.Add(user);

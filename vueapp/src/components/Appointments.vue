@@ -61,15 +61,24 @@
                 this.currentAppointment = { ...appointment };
             },
             async createAppointment() {
-                await axios.post("/api/appointments", this.currentAppointment);
+                let appointmentPayload = {
+                    ...this.currentAppointment,
+                    time: `${this.currentAppointment.time}:00`  // Add :00 to format the time as hh:mm:ss
+                };
+                await axios.post("/api/appointments", appointmentPayload);
                 await this.fetchAppointments();
                 this.resetForm();
             },
             async updateAppointment() {
-                await axios.put(`/api/appointments/${this.currentAppointment.id}`, this.currentAppointment);
+                let appointmentPayload = {
+                    ...this.currentAppointment,
+                    time: `${this.currentAppointment.time}:00`  // Add :00 to format the time as hh:mm:ss
+                };
+                await axios.put(`/api/appointments/${this.currentAppointment.id}`, appointmentPayload);
                 await this.fetchAppointments();
                 this.resetForm();
             },
+            
             async deleteAppointment(id) {
                 await axios.delete(`/api/appointments/${id}`);
                 await this.fetchAppointments();

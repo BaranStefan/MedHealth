@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace webapi.Migrations
 {
     /// <inheritdoc />
-    public partial class Appointment : Migration
+    public partial class DateTime : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

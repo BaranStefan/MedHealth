@@ -23,26 +23,53 @@
         <p>Already have an account? <router-link to="/login">Login</router-link></p>
     </div>
 </template>
-
 <script>
-export default {
-  data() {
-    return {
-      username: '',
-      email: '',
-      password: '',
-      confirmPassword: ''
+    import axios from 'axios'; // Import axios at the top
+
+    export default {
+        data() {
+            return {
+                username: '',
+                email: '',
+                password: '',
+                confirmPassword: ''
+            };
+        },
+        methods: {
+            async submitForm() {
+                // Check if passwords match
+                if (this.password !== this.confirmPassword) {
+                    alert('Passwords do not match.');
+                    return;
+                }
+
+                try {
+                    // Send POST request to register endpoint
+                    const response = await axios.post('/api/account/register', {
+                        Username: this.username,
+                        Email: this.email,
+                        Password: this.password,
+                        ConfirmPassword: this.confirmPassword
+                    });
+
+                    if (response.status === 200) {
+                        alert(response.data.Message);
+                        // Optionally redirect to login or another page
+                        this.$router.push('/login');
+                    }
+                } catch (error) {
+                    // Handle error response from the server
+                    if (error.response && error.response.data) {
+                        alert(error.response.data); // Show the error message
+                    } else {
+                        alert('An error occurred during registration.');
+                    }
+                }
+            }
+        }
     };
-  },
-  methods: {
-    submitForm() {
-      // TODO: Implement logic to send this data to your backend for registration.
-      console.log("Register attempt:", this.username, this.email);
-      // Ensure you handle the data securely and do not log sensitive information in production!
-    }
-  }
-};
 </script>
+
 
 <style scoped>
     /* Style similar to the login page for consistency */
