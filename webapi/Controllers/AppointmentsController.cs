@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using YourProjectName.Data;
 
+
+
 [Route("api/[controller]")]
 [ApiController]
 public class AppointmentsController : ControllerBase
@@ -36,11 +38,20 @@ public class AppointmentsController : ControllerBase
 
         return appointment;
     }
-
     // POST: api/Appointments
     [HttpPost]
     public async Task<ActionResult<Appointment>> PostAppointment(Appointment appointment)
     {
+        if (appointment.Date <= DateTime.Now)
+        {
+            return BadRequest("The appointment date and time cannot be in the past.");
+        }
+
+        if (AppointmentConflict(appointment.DoctorId, appointment.Date))
+        {
+            return BadRequest("An appointment already exists for this doctor at the specified time.");
+        }
+
         _context.Appointments.Add(appointment);
         await _context.SaveChangesAsync();
 
@@ -51,9 +62,19 @@ public class AppointmentsController : ControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> PutAppointment(int id, Appointment appointment)
     {
+        if (appointment.Date <= DateTime.Now)
+        {
+            return BadRequest("The appointment date and time cannot be in the past.");
+        }
+
         if (id != appointment.Id)
         {
             return BadRequest();
+        }
+
+        if (AppointmentConflict(appointment.DoctorId, appointment.Date, id))
+        {
+            return BadRequest("An appointment already exists for this doctor at the specified time.");
         }
 
         _context.Entry(appointment).State = EntityState.Modified;
@@ -77,24 +98,16 @@ public class AppointmentsController : ControllerBase
         return NoContent();
     }
 
-    // DELETE: api/Appointments/5
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteAppointment(int id)
-    {
-        var appointment = await _context.Appointments.FindAsync(id);
-        if (appointment == null)
-        {
-            return NotFound();
-        }
 
-        _context.Appointments.Remove(appointment);
-        await _context.SaveChangesAsync();
-
-        return NoContent();
-    }
 
     private bool AppointmentExists(int id)
     {
         return _context.Appointments.Any(e => e.Id == id);
     }
+
+    private bool AppointmentConflict(int doctorId, DateTime date, int? excludeId = null)
+    {
+        return _context.Appointments.Any(a => a.DoctorId == doctorId && a.Date == date && (!excludeId.HasValue || a.Id != excludeId.Value));
+    }
+
 }

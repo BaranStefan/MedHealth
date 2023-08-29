@@ -36,9 +36,6 @@ namespace webapi.Migrations
                     b.Property<int>("DoctorId")
                         .HasColumnType("int");
 
-                    b.Property<TimeSpan>("Time")
-                        .HasColumnType("time");
-
                     b.HasKey("Id");
 
                     b.HasIndex("DoctorId");
