@@ -1,9 +1,8 @@
-﻿// Controllers/AccountController.cs
-
+﻿
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using YourProjectName.Data;
+using webapi.Data;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -30,7 +29,7 @@ public class AccountController : ControllerBase
         {
             Username = dto.Username,
             Email = dto.Email,
-            PasswordHash = dto.Password  // Store the password as plain text (HIGHLY INSECURE!)
+            Password = dto.Password  // Store the password as plain text (HIGHLY INSECURE!)
         };
 
         _context.Users.Add(user);

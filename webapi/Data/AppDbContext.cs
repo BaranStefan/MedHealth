@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using YourNamespace.Models;
+using webapi.Models;
 
-namespace YourProjectName.Data
+namespace webapi.Data
 {
     public class AppDbContext : DbContext
     {
@@ -15,6 +15,6 @@ namespace YourProjectName.Data
 
         public DbSet<User> Users { get; set; }
 
-        // DbSet for other entities...
+        
     }
 }

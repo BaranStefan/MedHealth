@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using YourProjectName.Data;
+using webapi.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,7 +17,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("VueCorsPolicy", builder =>
     {
         builder
-            .WithOrigins("https://localhost:5173") // Adjusted this line to remove trailing slash
+            .WithOrigins("https://localhost:5173") 
             .AllowAnyMethod()
             .AllowAnyHeader()
             .AllowCredentials();

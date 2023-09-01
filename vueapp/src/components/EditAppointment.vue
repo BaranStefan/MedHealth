@@ -1,7 +1,6 @@
 <template>
     <div class="edit-appointment-container">
         <h2>Edit Appointment</h2>
-        <!-- Form to Edit Existing Appointment -->
         <form @submit.prevent="updateAppointment">
             <div>
                 <label for="doctorId">Doctor:</label>
@@ -61,7 +60,7 @@
                     ...this.currentAppointment,
                     date: dateTime
                 });
-                this.$router.push("/list-appointments"); // Redirect to the list page after updating
+                this.$router.push("/list-appointments"); 
             }
         }
     };

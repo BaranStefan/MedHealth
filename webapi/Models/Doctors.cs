@@ -1,7 +1,6 @@
-﻿// Models/Doctor.cs
-using System;
+﻿using System;
 
-namespace YourNamespace.Models
+namespace webapi.Models
 {
     public class Doctor
     {

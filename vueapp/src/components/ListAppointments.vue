@@ -1,15 +1,12 @@
 <template>
     <div class="container">
-        <!-- Listing Appointments -->
         <div class="appointment-item" v-for="appointment in appointments" :key="appointment.id">
             <h3>Doctor: {{ appointment.doctor.name }} - Date: {{ appointment.dateOnly }} - Time: {{ appointment.timeOnly }}</h3>
             <div class="button-container">
                 <button @click="editAppointment(appointment.id)">Edit</button>
                 <button @click="deleteAppointment(appointment.id)">Delete</button>
             </div>
-        </div>
-
-        <!-- Button to navigate to Add Appointment page -->
+        </div>        
         <button @click="goToAddAppointment">Add Appointment</button>
     </div>
 </template>
@@ -78,6 +75,6 @@
 
     .button-container {
         display: flex;
-        gap: 30px; /* This will add spacing between the buttons */
+        gap: 30px; 
     }
 </style>

@@ -1,4 +1,4 @@
-﻿using YourNamespace.Models;
+﻿using webapi.Models;
 
 public class Appointment
 {

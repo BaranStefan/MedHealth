@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using YourNamespace.Models;
+using webapi.Models;
 using System.Linq;
 using System.Threading.Tasks;
-using YourProjectName.Data;
+using webapi.Data;
 
 
 
@@ -38,6 +38,7 @@ public class AppointmentsController : ControllerBase
 
         return appointment;
     }
+
     // POST: api/Appointments
     [HttpPost]
     public async Task<ActionResult<Appointment>> PostAppointment(Appointment appointment)

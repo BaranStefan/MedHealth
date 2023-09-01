@@ -1,7 +1,6 @@
 <template>
     <div class="add-doctor-container">
         <h2>Add Doctor</h2>
-        <!-- Form to Add Doctor -->
         <form @submit.prevent="createDoctor">
             <div>
                 <label for="doctorName">Doctor Name:</label>
@@ -36,7 +35,7 @@
         methods: {
             async createDoctor() {
                 await axios.post("/api/doctors", this.currentDoctor);
-                this.$router.push('/doctors');  // navigate back to the list of doctors after adding
+                this.$router.push('/doctors');  
             }
         }
     };

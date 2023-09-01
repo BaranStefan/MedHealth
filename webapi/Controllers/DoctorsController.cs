@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using YourNamespace.Models;
-using YourProjectName.Data;
+using webapi.Models;
+using webapi.Data;
 using System.Linq;
 using System.Threading.Tasks;
 

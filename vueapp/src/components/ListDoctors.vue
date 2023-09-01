@@ -1,6 +1,5 @@
 <template>
     <div class="container">
-        <!-- Listing Doctors -->
         <div class="doctor-item" v-for="doctor in doctors" :key="doctor.id">
             <h3>{{ doctor.name }} - {{ doctor.speciality }}</h3>
             <p>Phone: {{ doctor.phone }}</p>
@@ -10,8 +9,6 @@
                 <button @click="deleteDoctor(doctor.id)">Delete</button>
             </div>
         </div>
-
-        <!-- Button to navigate to Add Doctor page -->
         <button @click="goToAddDoctor">Add Doctor</button>
     </div>
 </template>
@@ -41,7 +38,6 @@
                 this.$router.push('/add-doctor');
             },
             editDoctor(doctor) {
-                // Navigate to EditDoctor with doctor's id as a route parameter
                 this.$router.push(`/edit-doctor/${doctor.id}`);
             }
         }
@@ -61,7 +57,7 @@
     .form-container {
         display: flex;
         flex-direction: column;
-        gap: 10px; /* provides spacing between form elements */
+        gap: 10px; 
         width: 300px;
         margin-top: 20px;
     }
@@ -85,6 +81,6 @@
 
     .button-container {
         display: flex;
-        gap: 30px; /* This will add spacing between the buttons */
+        gap: 30px; 
     }
 </style>

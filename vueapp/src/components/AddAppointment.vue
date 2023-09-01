@@ -1,7 +1,6 @@
 <template>
     <div class="add-appointment-container">
         <h2>Add Appointment</h2>
-        <!-- Form to Add New Appointment -->
         <form @submit.prevent="createAppointment">
             <div>
                 <label for="doctorId">Doctor:</label>
@@ -55,7 +54,7 @@
                     ...this.currentAppointment,
                     date: dateTime
                 });
-                this.$router.push("/list-appointments"); // Redirect to the list page after creation
+                this.$router.push("/list-appointments"); 
             }
         }
     };

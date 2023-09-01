@@ -34,7 +34,7 @@
             };
         },
         mounted() {
-            // Fetch the existing data for the doctor, assuming you can get doctor's id from the route parameter
+            
             axios.get(`/api/doctors/${this.$route.params.id}`)
                 .then(response => {
                     this.currentDoctor = response.data;
@@ -43,7 +43,7 @@
         methods: {
             async updateDoctor() {
                 await axios.put(`/api/doctors/${this.currentDoctor.id}`, this.currentDoctor);
-                this.$router.push('/doctors'); // navigate back to the list of doctors after editing
+                this.$router.push('/doctors'); 
             }
         }
     };
