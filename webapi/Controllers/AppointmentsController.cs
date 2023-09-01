@@ -99,6 +99,21 @@ public class AppointmentsController : ControllerBase
     }
 
 
+    // DELETE: api/Appointments/5
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteAppointment(int id)
+    {
+        var appointment = await _context.Appointments.FindAsync(id);
+        if (appointment == null)
+        {
+            return NotFound();
+        }
+
+        _context.Appointments.Remove(appointment);
+        await _context.SaveChangesAsync();
+
+        return NoContent();
+    }
 
     private bool AppointmentExists(int id)
     {

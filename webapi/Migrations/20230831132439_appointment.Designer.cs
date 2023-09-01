@@ -12,8 +12,8 @@ using YourProjectName.Data;
 namespace webapi.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230829120659_M1")]
-    partial class M1
+    [Migration("20230831132439_appointment")]
+    partial class appointment
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

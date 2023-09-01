@@ -5,8 +5,10 @@
             <h3>{{ doctor.name }} - {{ doctor.speciality }}</h3>
             <p>Phone: {{ doctor.phone }}</p>
             <p>Email: {{ doctor.mail }}</p>
-            <button @click="editDoctor(doctor)">Edit</button>
-            <button @click="deleteDoctor(doctor.id)">Delete</button>
+            <div class="button-container">
+                <button @click="editDoctor(doctor)">Edit</button>
+                <button @click="deleteDoctor(doctor.id)">Delete</button>
+            </div>
         </div>
 
         <!-- Button to navigate to Add Doctor page -->
@@ -46,7 +48,6 @@
     };
 </script>
 
-
 <style scoped>
     .container {
         display: flex;
@@ -80,5 +81,10 @@
 
     button {
         cursor: pointer;
+    }
+
+    .button-container {
+        display: flex;
+        gap: 30px; /* This will add spacing between the buttons */
     }
 </style>

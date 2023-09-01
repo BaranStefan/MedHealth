@@ -2,7 +2,7 @@
     <nav class="navbar">
         <router-link to="/" exact class="nav-item">Home</router-link>
         <router-link to="/Doctors" class="nav-item">Doctors</router-link>
-        <router-link to="/Appointments" class="nav-item">Appointments</router-link>
+        <router-link to="/list-appointments" class="nav-item">Appointments</router-link>
         <router-link to="/Register" class="nav-item">Register</router-link>
         <router-link to="/Login" class="nav-item">Login</router-link>
     </nav>
