@@ -4,16 +4,28 @@
             <h3>{{ doctor.name }} - {{ doctor.speciality }}</h3>
             <p>Phone: {{ doctor.phone }}</p>
             <p>Email: {{ doctor.mail }}</p>
-            <div class="button-container">
+            <div class="button-container" v-if="state.user && state.user.isAdmiin">
                 <button @click="editDoctor(doctor)">Edit</button>
                 <button @click="deleteDoctor(doctor.id)">Delete</button>
             </div>
+
         </div>
-        <button @click="goToAddDoctor">Add Doctor</button>
+        <div v-if="state.user && state.user.isAdmiin">
+            <button @click="goToAddDoctor">Add Doctor</button>
+        </div>
     </div>
+    <template>
+        <div class="container">
+            <!-- Debugging: Display user info -->
+            <pre>{{ state.user }}</pre>
+            <!-- ... rest of your code ... -->
+        </div>
+    </template>
+
 </template>
 
 <script>
+    import { inject } from 'vue';
     import axios from "axios";
 
     export default {
@@ -21,6 +33,10 @@
             return {
                 doctors: []
             };
+        },
+        setup() {
+            const state = inject('appState');
+            return { state };
         },
         async created() {
             await this.fetchDoctors();
@@ -44,6 +60,7 @@
     };
 </script>
 
+
 <style scoped>
     .container {
         display: flex;
@@ -57,7 +74,7 @@
     .form-container {
         display: flex;
         flex-direction: column;
-        gap: 10px; 
+        gap: 10px;
         width: 300px;
         margin-top: 20px;
     }
@@ -81,6 +98,6 @@
 
     .button-container {
         display: flex;
-        gap: 30px; 
+        gap: 30px;
     }
 </style>

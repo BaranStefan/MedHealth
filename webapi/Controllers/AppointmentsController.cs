@@ -42,17 +42,7 @@ public class AppointmentsController : ControllerBase
     // POST: api/Appointments
     [HttpPost]
     public async Task<ActionResult<Appointment>> PostAppointment(Appointment appointment)
-    {
-        if (appointment.Date <= DateTime.Now)
-        {
-            return BadRequest("The appointment date and time cannot be in the past.");
-        }
-
-        if (AppointmentConflict(appointment.DoctorId, appointment.Date))
-        {
-            return BadRequest("An appointment already exists for this doctor at the specified time.");
-        }
-
+    {     
         _context.Appointments.Add(appointment);
         await _context.SaveChangesAsync();
 
@@ -115,6 +105,8 @@ public class AppointmentsController : ControllerBase
 
         return NoContent();
     }
+
+
 
     private bool AppointmentExists(int id)
     {

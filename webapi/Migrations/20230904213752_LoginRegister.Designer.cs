@@ -12,8 +12,8 @@ using webapi.Data;
 namespace webapi.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230831132439_appointment")]
-    partial class appointment
+    [Migration("20230904213752_LoginRegister")]
+    partial class LoginRegister
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -58,7 +58,10 @@ namespace webapi.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PasswordHash")
+                    b.Property<bool>("IsAdmiin")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -71,7 +74,7 @@ namespace webapi.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("YourNamespace.Models.Doctor", b =>
+            modelBuilder.Entity("webapi.Models.Doctor", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -102,7 +105,7 @@ namespace webapi.Migrations
 
             modelBuilder.Entity("Appointment", b =>
                 {
-                    b.HasOne("YourNamespace.Models.Doctor", "Doctor")
+                    b.HasOne("webapi.Models.Doctor", "Doctor")
                         .WithMany()
                         .HasForeignKey("DoctorId")
                         .OnDelete(DeleteBehavior.Cascade)

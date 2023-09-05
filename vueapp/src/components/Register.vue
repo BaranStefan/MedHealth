@@ -24,7 +24,7 @@
     </div>
 </template>
 <script>
-    import axios from 'axios'; // Import axios at the top
+    import axios from 'axios'; 
 
     export default {
         data() {
@@ -37,15 +37,13 @@
         },
         methods: {
             async submitForm() {
-                // Check if passwords match
                 if (this.password !== this.confirmPassword) {
                     alert('Passwords do not match.');
                     return;
                 }
 
                 try {
-                    // Send POST request to register endpoint
-                    const response = await axios.post('/api/account/register', {
+                    const response = await axios.post('/api/user/register', {
                         Username: this.username,
                         Email: this.email,
                         Password: this.password,
@@ -54,13 +52,12 @@
 
                     if (response.status === 200) {
                         alert(response.data.Message);
-                        // Optionally redirect to login or another page
                         this.$router.push('/login');
                     }
                 } catch (error) {
                     // Handle error response from the server
                     if (error.response && error.response.data) {
-                        alert(error.response.data); // Show the error message
+                        alert(error.response.data);
                     } else {
                         alert('An error occurred during registration.');
                     }
@@ -72,7 +69,6 @@
 
 
 <style scoped>
-    /* Style similar to the login page for consistency */
     .register-container {
         max-width: 300px;
         margin: 0 auto;

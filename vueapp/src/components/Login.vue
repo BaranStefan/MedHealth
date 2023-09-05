@@ -3,8 +3,8 @@
         <h3>Login</h3>
         <form @submit.prevent="submitForm">
             <div>
-                <label for="username">Username:</label>
-                <input type="text" id="username" v-model="username" required />
+                <label for="email">Email:</label>
+                <input type="text" id="email" v-model="email" required />
             </div>
             <div>
                 <label for="password">Password:</label>
@@ -16,36 +16,45 @@
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      username: '',
-      password: ''
-    };
-  },
-  methods: {
-    async submitForm() {
-      // TODO: Implement logic to send this data to your .NET 6 backend for validation.
-      // For example, using axios:
-      /*
-      axios.post('/api/auth/login', {
-        username: this.username,
-        password: this.password
-      }).then(response => {
-        if (response.data.success) {
-          // Store your token or handle login success here
-        } else {
-          // Handle login failure, show a message, etc.
-        }
-      }).catch(error => {
-        console.error("There was an error during login:", error);
-      });
-      */
+    import axios from 'axios';  
+    import { useRouter } from 'vue-router';
+    import { ref, inject } from 'vue';
 
-      console.log("Login attempt:", this.username);
-    }
-  }
-};
+    export default {
+        setup() {
+            const email = ref('');
+            const password = ref('');
+            const state = inject('appState');
+            const router = useRouter();
+
+
+            const submitForm = async () => {
+                try {
+                    const response = await axios.post('/api/user/login', {
+                        Email: email.value,
+                        Password: password.value
+                    });
+
+                    if (response.status === 200) {
+                        alert(response.data.message); 
+                        state.user = response.data.user; 
+                        console.log("Backend response:", response.data);
+                        router.push('/');
+                    }
+
+                } catch (error) {
+                    // Handle error response from the server
+                    if (error.response && error.response.data) {
+                        alert(error.response.data); 
+                    } else {
+                        alert('An error occurred during login.');
+                    }
+
+                }
+            }
+            return { email, password, state, submitForm };
+        }
+    };
 </script>
 
 <style scoped>

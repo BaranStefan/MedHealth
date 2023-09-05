@@ -1,48 +1,61 @@
-﻿
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 using webapi.Data;
 
-[ApiController]
-[Route("api/[controller]")]
-public class AccountController : ControllerBase
+namespace YourNamespace.Controllers
 {
-    private readonly AppDbContext _context;
-
-    public AccountController(AppDbContext context)
+    [ApiController]
+    [Route("api/[controller]")]
+    public class UserController : ControllerBase
     {
-        _context = context;
-    }
+        private readonly AppDbContext _context;
 
-    [HttpPost("register")]
-    public async Task<IActionResult> Register(RegisterDto dto)
-    {
-        if (dto.Password != dto.ConfirmPassword)
-            return BadRequest("Passwords do not match.");
-
-        var userExists = await _context.Users.AnyAsync(u => u.Username == dto.Username || u.Email == dto.Email);
-        if (userExists)
-            return BadRequest("User already exists.");
-
-        var user = new User
+        public UserController(AppDbContext context)
         {
-            Username = dto.Username,
-            Email = dto.Email,
-            Password = dto.Password  // Store the password as plain text (HIGHLY INSECURE!)
-        };
+            _context = context;
+        }
 
-        _context.Users.Add(user);
-        await _context.SaveChangesAsync();
+        // POST api/user/register
+        [HttpPost("register")]
+        public ActionResult Register(User user)
+        {
+            if (_context.Users.Any(u => u.Email == user.Email))
+            {
+                return BadRequest("Email already exists.");
+            }
 
-        return Ok(new { Message = "Registration successful" });
+            if (_context.Users.Any(u => u.Username == user.Username))
+            {
+                return BadRequest("Username already exists.");
+            }
+
+            
+
+            _context.Users.Add(user);
+            _context.SaveChanges();
+
+            return Ok("User registered successfully.");
+        }
+
+        // POST api/user/login
+        [HttpPost("login")]
+        public ActionResult Login(LoginRequest request)
+        {
+            var user = _context.Users.FirstOrDefault(u => u.Email == request.Email && u.Password == request.Password);
+
+            if (user == null)
+            {
+                return Unauthorized("Invalid email or password.");
+            }
+
+            return Ok(new { message = "Logged in successfully.", user });
+        }
+
     }
-}
 
-public class RegisterDto
-{
-    public required string Username { get; set; }
-    public required string Email { get; set; }
-    public required string Password { get; set; }
-    public required string ConfirmPassword { get; set; }
+    public class LoginRequest
+    {
+        public string Email { get; set; }
+        public string Password { get; set; }
+    }
 }
