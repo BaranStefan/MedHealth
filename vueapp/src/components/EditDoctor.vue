@@ -1,7 +1,6 @@
 <template>
     <div class="edit-doctor-container">
         <h2>Edit Doctor</h2>
-        <!-- Form to Edit Doctor -->
         <form @submit.prevent="updateDoctor">
             <div>
                 <label for="doctorName">Doctor Name:</label>

@@ -14,13 +14,6 @@
             <button @click="goToAddDoctor">Add Doctor</button>
         </div>
     </div>
-    <template>
-        <div class="container">
-            <!-- Debugging: Display user info -->
-            <pre>{{ state.user }}</pre>
-            <!-- ... rest of your code ... -->
-        </div>
-    </template>
 
 </template>
 

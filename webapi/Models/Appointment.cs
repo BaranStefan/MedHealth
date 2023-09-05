@@ -6,5 +6,5 @@ public class Appointment
     public int DoctorId { get; set; }
     public DateTime Date { get; set; }
 
-    public required Doctor Doctor { get; set; } // Navigation property
+    public required Doctor Doctor { get; set; } 
 }

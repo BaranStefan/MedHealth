@@ -38,7 +38,6 @@
                     if (response.status === 200) {
                         alert(response.data.message); 
                         state.user = response.data.user; 
-                        console.log("Backend response:", response.data);
                         router.push('/');
                     }
 

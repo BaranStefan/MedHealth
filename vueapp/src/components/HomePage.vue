@@ -12,11 +12,11 @@
     export default {
         data() {
             return {
-                // Your data properties...
+                
             };
         },
         methods: {
-            // Your methods...
+            
         }
     };
 </script>
