@@ -4,11 +4,12 @@
         <form @submit.prevent="createAppointment">
             <div>
                 <label for="doctorId">Doctor:</label>
-                <select id="doctorId" v-model="currentAppointment.doctorId" required>
-                    <option v-for="doctor in doctors" :key="doctor.id" :value="doctor.id">
+                <select id="doctorId" v-model="currentAppointment.doctor" required>
+                    <option v-for="doctor in doctors" :key="doctor.id" :value="doctor">
                         {{ doctor.name }}
                     </option>
                 </select>
+
             </div>
 
             <div>
@@ -34,6 +35,7 @@
             return {
                 doctors: [],
                 currentAppointment: {
+                    doctor: null,
                     doctorId: '',
                     date: '',
                     time: ''
@@ -48,14 +50,19 @@
                 const response = await axios.get("/api/doctors");
                 this.doctors = response.data;
             },
+
             async createAppointment() {
                 const dateTime = `${this.currentAppointment.date}T${this.currentAppointment.time}:00`;
                 await axios.post("/api/appointments", {
-                    ...this.currentAppointment,
+                    doctorId: this.currentAppointment.doctor.id,
+                    doctor: this.currentAppointment.doctor,
                     date: dateTime
                 });
-                this.$router.push("/list-appointments"); 
+                this.$router.push("/list-appointments");
             }
+
+
+
         }
     };
 </script>

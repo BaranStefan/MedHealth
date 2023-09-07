@@ -42,7 +42,11 @@ public class AppointmentsController : ControllerBase
     // POST: api/Appointments
     [HttpPost]
     public async Task<ActionResult<Appointment>> PostAppointment(Appointment appointment)
-    {     
+    {
+        var doctor = _context.Doctors.FirstOrDefault(d => d.Id == appointment.DoctorId);
+
+        appointment.Doctor = doctor;
+        
         _context.Appointments.Add(appointment);
         await _context.SaveChangesAsync();
 

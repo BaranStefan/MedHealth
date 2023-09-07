@@ -4,7 +4,7 @@
         <p>Already have an account? <router-link to="/login">Login</router-link></p>
         <p>Don't have an account?  <router-link to="/register">Register</router-link></p>
         <p><router-link to="/doctors">See Doctors</router-link></p>
-        <p><router-link to="/appointments">Book an Appointment</router-link></p>
+        <p><router-link to="/list-appointments">Book an Appointment</router-link></p>
     </div>
 </template>
 
