@@ -70,6 +70,7 @@
 
 <style scoped>
     .register-container {
+        background-color: #f7f7f7;
         max-width: 300px;
         margin: 0 auto;
         padding: 20px;

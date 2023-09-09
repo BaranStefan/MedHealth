@@ -97,6 +97,7 @@
         }
 
     .doctor-item {
+        background-color: #f7f7f7;
         border: 1px solid #eee;
         padding: 15px;
         margin-bottom: 20px;
