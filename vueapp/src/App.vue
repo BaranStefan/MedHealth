@@ -22,5 +22,11 @@
 </script>
 
 <style scoped>
-    
+    #app {
+        background-image: url(~@/assets/medical.jpg);
+        background-size: cover; 
+        background-position: center; 
+        background-repeat: no-repeat; 
+        min-height: 100vh; 
+    }
 </style>

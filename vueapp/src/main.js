@@ -23,7 +23,7 @@ const routes = [
     { path: '/add-doctor', component: AddDoctor },
     { path: '/edit-doctor/:id', component: EditDoctor },
     { path: '/list-appointments', component: ListAppointments , meta: { requiresAuth: true } },
-    { path: '/add-appointment', component: AddAppointment },
+    { path: '/add-appointment/:doctorId?', name: 'add-appointment', component: AddAppointment },
     { path: '/edit-appointment/:id', component: EditAppointment },
     { path: '/access-denied', component: AccessDenied },
 ];

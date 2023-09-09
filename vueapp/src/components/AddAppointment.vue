@@ -6,10 +6,9 @@
                 <label for="doctorId">Doctor:</label>
                 <select id="doctorId" v-model="currentAppointment.doctor" required>
                     <option v-for="doctor in doctors" :key="doctor.id" :value="doctor">
-                        {{ doctor.name }}
+                        {{ doctor.name }} -{{doctor.speciality}}
                     </option>
                 </select>
-
             </div>
 
             <div>
@@ -28,12 +27,14 @@
 </template>
 
 <script>
+    import { ref, onMounted } from 'vue';
     import axios from "axios";
 
     export default {
         data() {
             return {
                 doctors: [],
+                doctorId: ref(null),
                 currentAppointment: {
                     doctor: null,
                     doctorId: '',
@@ -44,25 +45,33 @@
         },
         async created() {
             await this.fetchDoctors();
+            this.doctorId = this.$route.params.doctorId;
+            if (this.doctorId) {
+                this.currentAppointment.doctor = this.doctors.find(d => d.id == this.doctorId);
+            }
         },
         methods: {
             async fetchDoctors() {
                 const response = await axios.get("/api/doctors");
                 this.doctors = response.data;
             },
-
             async createAppointment() {
                 const dateTime = `${this.currentAppointment.date}T${this.currentAppointment.time}:00`;
-                await axios.post("/api/appointments", {
-                    doctorId: this.currentAppointment.doctor.id,
-                    doctor: this.currentAppointment.doctor,
-                    date: dateTime
-                });
-                this.$router.push("/list-appointments");
+                try {
+                    await axios.post("/api/appointments", {
+                        doctorId: this.currentAppointment.doctor.id,
+                        doctor: this.currentAppointment.doctor,
+                        date: dateTime
+                    });
+                    this.$router.push("/list-appointments");
+                } catch (error) {
+                    if (error.response && error.response.status === 400) {
+                        alert(error.response.data);
+                    } else {
+                        alert("An unexpected error occurred.");
+                    }
+                }
             }
-
-
-
         }
     };
 </script>

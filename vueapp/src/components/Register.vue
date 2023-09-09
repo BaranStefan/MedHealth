@@ -51,7 +51,7 @@
                     });
 
                     if (response.status === 200) {
-                        alert(response.data.Message);
+                        alert(response.data.message);
                         this.$router.push('/login');
                     }
                 } catch (error) {

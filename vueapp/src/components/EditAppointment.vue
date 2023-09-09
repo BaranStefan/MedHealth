@@ -6,7 +6,7 @@
                 <label for="doctorId">Doctor:</label>
                 <select id="doctorId" v-model="currentAppointment.doctorId" required>
                     <option v-for="doctor in doctors" :key="doctor.id" :value="doctor.id">
-                        {{ doctor.name }}
+                        {{ doctor.name }} - {{doctor.speciality}}
                     </option>
                 </select>
             </div>
@@ -56,12 +56,21 @@
             },
             async updateAppointment() {
                 const dateTime = `${this.currentAppointment.date}T${this.currentAppointment.time}:00`;
-                await axios.put(`/api/appointments/${this.currentAppointment.id}`, {
-                    ...this.currentAppointment,
-                    date: dateTime
-                });
-                this.$router.push("/list-appointments"); 
+                try {
+                    await axios.put(`/api/appointments/${this.currentAppointment.id}`, {
+                        ...this.currentAppointment,
+                        date: dateTime
+                    });
+                    this.$router.push("/list-appointments");
+                } catch (error) {
+                    if (error.response && error.response.status === 400) {
+                        alert(error.response.data);
+                    } else {
+                        alert("An unexpected error occurred.");
+                    }
+                }
             }
+
         }
     };
 </script>

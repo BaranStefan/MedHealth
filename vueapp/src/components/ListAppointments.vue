@@ -1,13 +1,20 @@
 <template>
     <div class="container">
         <div class="appointment-item" v-for="appointment in appointments" :key="appointment.id">
-            <h3>Doctor: {{ appointment.doctor.name }} - Date: {{ appointment.dateOnly }} - Time: {{ appointment.timeOnly }}</h3>
+            <h3>
+                Appointment with Dr. {{ appointment.doctor.name }} - {{ appointment.doctor.speciality }}
+            </h3>
+            <h4>
+                Date: {{ appointment.dateOnly }} | Time: {{ appointment.timeOnly }}
+            </h4>
             <div class="button-container">
-                <button @click="editAppointment(appointment.id)">Edit</button>
-                <button @click="deleteAppointment(appointment.id)">Delete</button>
+                <button class="edit-btn" @click="editAppointment(appointment.id)">Edit</button>
+                <button class="delete-btn" @click="deleteAppointment(appointment.id)">Delete</button>
             </div>
-        </div>        
-        <button @click="goToAddAppointment">Add Appointment</button>
+        </div>
+        <div class="add-appointment">
+            <button @click="goToAddAppointment">Add Appointment</button>
+        </div>
     </div>
 </template>
 
@@ -51,30 +58,59 @@
 
 <style scoped>
     .container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
+        max-width: 800px;
+        margin: 0 auto;
         padding: 20px;
+        font-family: 'Arial', sans-serif;
     }
 
     .appointment-item {
-        border-bottom: 1px solid #ccc;
-        padding-bottom: 10px;
-        margin-bottom: 10px;
+        background-color: #f7f7f7;
+        padding: 15px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.05);
     }
 
-    button {
-        padding: 10px;
-        font-size: 1rem;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        cursor: pointer;
+    h3, h4 {
+        margin: 10px 0;
     }
 
     .button-container {
         display: flex;
-        gap: 30px; 
+        gap: 15px;
+        margin-top: 15px;
+    }
+
+    button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: background-color 0.3s ease;
+    }
+
+    .edit-btn {
+        background-color: #3498db;
+        color: #fff;
+    }
+
+        .edit-btn:hover {
+            background-color: #2980b9;
+        }
+
+    .delete-btn {
+        background-color: #e74c3c;
+        color: #fff;
+    }
+
+        .delete-btn:hover {
+            background-color: #c0392b;
+        }
+
+    .add-appointment {
+        text-align: center;
+        margin-top: 20px;
     }
 </style>
